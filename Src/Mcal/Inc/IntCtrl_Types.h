@@ -15,6 +15,7 @@
  * INCLUDES
  *********************************************************************************************************************/
 #include "Std_Types.h"
+#include "IntCtrl_Cfg.h"
 
 /**********************************************************************************************************************
  *  GLOBAL CONSTANT MACROS
@@ -29,12 +30,22 @@
 /**********************************************************************************************************************
  *  GLOBAL DATA TYPES AND STRUCTURES
  *********************************************************************************************************************/
+
 typedef enum
 {
-
-
-
+    GPIO_PORTA_INTERRUPT = 0
 }IntCtrl_InterruptType;
+
+
+
+
+typedef enum
+{
+    NO_OF_GROUPS_8_NO_OF_SUBGROUPS_1 = 0X0,
+    NO_OF_GROUPS_4_NO_OF_SUBGROUPS_2 = 0X5,
+    NO_OF_GROUPS_2_NO_OF_SUBGROUPS_4 = 0X6,
+    NO_OF_GROUPS_1_NO_OF_SUBGROUPS_8 = 0X7
+}INTERRUPT_PRIORITY_LEVEL;
 
  
 #endif  /* INTCTRL_TYPES_H */

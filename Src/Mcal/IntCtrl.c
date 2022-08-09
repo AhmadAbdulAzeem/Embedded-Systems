@@ -13,20 +13,22 @@
  *  INCLUDES
  *********************************************************************************************************************/
 #include "Std_Types.h"
-#include "IntCrtl.h"
+#include "IntCtrl.h"
 #include "Mcu_Hw.h"
+#include "IntCtrl_Cfg.h"
 
 /**********************************************************************************************************************
-*  LOCAL MACROS CONSTANT\FUNCTION
-*********************************************************************************************************************/	
+ *  LOCAL MACROS CONSTANT\FUNCTION
+ *********************************************************************************************************************/
 
 /**********************************************************************************************************************
- *  LOCAL DATA 
+ *  LOCAL DATA
  *********************************************************************************************************************/
 
 /**********************************************************************************************************************
  *  GLOBAL DATA
  *********************************************************************************************************************/
+
 
 /**********************************************************************************************************************
  *  LOCAL FUNCTION PROTOTYPES
@@ -40,32 +42,27 @@
  *  GLOBAL FUNCTIONS
  *********************************************************************************************************************/
 
-
 /******************************************************************************
-* \Syntax          : void IntCrtl_Init(void)                                      
-* \Description     : initialize Nvic\SCB Module by parsing the Configuration 
-*                    into Nvic\SCB registers                                    
-*                                                                             
-* \Sync\Async      : Synchronous                                               
-* \Reentrancy      : Non Reentrant                                             
-* \Parameters (in) : None                     
-* \Parameters (out): None                                                      
-* \Return value:   : None
-*******************************************************************************/
+ * \Syntax          : void IntCrtl_Init(void)
+ * \Description     : initialize Nvic\SCB Module by parsing the Configuration
+ *                    into Nvic\SCB registers
+ *
+ * \Sync\Async      : Synchronous
+ * \Reentrancy      : Non Reentrant
+ * \Parameters (in) : None
+ * \Parameters (out): None
+ * \Return value:   : None
+ *******************************************************************************/
 void IntCrtl_Init(void)
 {
+    /* TODO Configure Grouping\SubGrouping System in APINT register in SCB*/
+    APINT = (0x05FA0000 | (NO_OF_GROUPS_AND_NO_OF_SUBGROUPS << 8));
 
-	/*TODO Configure Grouping\SubGrouping System in APINT register in SCB*/
-    APINT = 0xFA05|0x00001234;
-    
-    /*TODO : Assign Group\Subgroup priority in NVIC_PRIx Nvic and SCB_SYSPRIx Registers*/  
+    /*TODO : Assign Group\Subgroup priority in NVIC_PRIx Nvic and SCB_SYSPRIx Registers*/
+    PRI0 |= 0x000000E0; /* GB = 3, SUB = 1 */
 
-
-	/*TODO : Enable\Disable based on user configurations in NVIC_ENx and SCB_Sys Registers */
-
-
-	
-
+    /*TODO : Enable\Disable based on user configurations in NVIC_ENx and SCB_Sys Registers */
+    EN0 = 0x00000001;
 }
 
 /**********************************************************************************************************************

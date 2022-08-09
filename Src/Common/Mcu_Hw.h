@@ -24,8 +24,7 @@ typedef struct
     uint32 VECACT   :8;
     uint32          :3;
     uint32 RETBASE  :1;
-    uint32 VECPEND  :3;
-    uint32 VECPEND  :4;
+    uint32 VECPEND  :8;
     uint32          :2;
     uint32 ISRPEND  :1;
     uint32 ISRPRE   :1;
@@ -37,6 +36,7 @@ typedef struct
     uint32          :2;
     uint32 NMISET   :1; 
 }INTCTRL_BF;
+
 typedef union 
 {
     uint32 R;
@@ -51,6 +51,8 @@ typedef union
 #define CORTEXM4_PERI_BASE_ADDRESS             0xE000E000
 #define APINT                                  *((volatile uint32*)(CORTEXM4_PERI_BASE_ADDRESS+0xD0C))
 #define INTCTRL                                *((volatile INTCTRL_Tag*)(CORTEXM4_PERI_BASE_ADDRESS+0xD04))
+#define PRI0                                  *((volatile uint32*)(CORTEXM4_PERI_BASE_ADDRESS+0x400))
+#define EN0                                  *((volatile uint32*)(CORTEXM4_PERI_BASE_ADDRESS+0x100))
 
 /**********************************************************************************************************************
  *  GLOBAL DATA PROTOTYPES

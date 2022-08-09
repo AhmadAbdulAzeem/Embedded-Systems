@@ -11,6 +11,8 @@
 #ifndef INTCTRL_CFG_H
 #define INTCTRL_CFG_H
 
+#include "IntCtrl_Types.h"
+
 /**********************************************************************************************************************
  * INCLUDES
  *********************************************************************************************************************/
@@ -20,6 +22,18 @@
  *  GLOBAL CONSTANT MACROS
  *********************************************************************************************************************/
 
+/*
+ * This configuration parameter to choose number of groups and subgroups
+ * Choose one of the following options
+ * NO_OF_GROUPS_8_NO_OF_SUBGROUPS_1 
+ * NO_OF_GROUPS_4_NO_OF_SUBGROUPS_2
+ * NO_OF_GROUPS_2_NO_OF_SUBGROUPS_4
+ * NO_OF_GROUPS_1_NO_OF_SUBGROUPS_8
+ */
+
+#define NO_OF_GROUPS_AND_NO_OF_SUBGROUPS NO_OF_GROUPS_4_NO_OF_SUBGROUPS_2
+
+#define MAX_NUMBER_OF_INTERRUPTS 1
 
 /**********************************************************************************************************************
  *  GLOBAL FUNCTION MACROS
