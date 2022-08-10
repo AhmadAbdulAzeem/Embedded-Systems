@@ -43,6 +43,16 @@ typedef union
     INTCTRL_BF B;
 }INTCTRL_Tag;
 
+typedef struct 
+{
+    volatile uint32 PRI[35];
+}NVIC_PRI;
+
+typedef struct 
+{
+    volatile uint32 EN[4];
+}NVIC_EN;
+
 
 
 /**********************************************************************************************************************
@@ -53,6 +63,10 @@ typedef union
 #define INTCTRL                                *((volatile INTCTRL_Tag*)(CORTEXM4_PERI_BASE_ADDRESS+0xD04))
 #define PRI0                                  *((volatile uint32*)(CORTEXM4_PERI_BASE_ADDRESS+0x400))
 #define EN0                                  *((volatile uint32*)(CORTEXM4_PERI_BASE_ADDRESS+0x100))
+
+#define NVIC_PRI_REGS        ((NVIC_PRI *)(CORTEXM4_PERI_BASE_ADDRESS+0x400))
+
+#define NVIC_EN_REGS        ((NVIC_EN *)(CORTEXM4_PERI_BASE_ADDRESS+0x100))
 
 /**********************************************************************************************************************
  *  GLOBAL DATA PROTOTYPES

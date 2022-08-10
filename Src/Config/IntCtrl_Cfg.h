@@ -11,12 +11,10 @@
 #ifndef INTCTRL_CFG_H
 #define INTCTRL_CFG_H
 
-#include "IntCtrl_Types.h"
-
 /**********************************************************************************************************************
  * INCLUDES
  *********************************************************************************************************************/
-
+#include "IntCtrl_Types.h"
 
 /**********************************************************************************************************************
  *  GLOBAL CONSTANT MACROS
@@ -31,9 +29,9 @@
  * NO_OF_GROUPS_1_NO_OF_SUBGROUPS_8
  */
 
-#define NO_OF_GROUPS_AND_NO_OF_SUBGROUPS NO_OF_GROUPS_4_NO_OF_SUBGROUPS_2
-
-#define MAX_NUMBER_OF_INTERRUPTS 1
+#define NO_OF_GROUPS_AND_NO_OF_SUBGROUPS NO_OF_GROUPS_2_NO_OF_SUBGROUPS_4
+#define NVIC_GROUP_SUBGROUP_PRIORITY GROUPPRIORITY_1_SUBPRIORITY_3_XYY
+#define MAX_NUMBER_OF_INTERRUPTS 7
 
 /**********************************************************************************************************************
  *  GLOBAL FUNCTION MACROS

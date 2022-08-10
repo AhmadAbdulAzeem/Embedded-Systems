@@ -15,6 +15,8 @@
 #include "Std_Types.h"
 #include "IntCtrl_Cfg.h"
 #include "IntCtrl_Types.h"
+#include "Mcu_Hw.h"
+#include "IntCtrl.h"
 
 /**********************************************************************************************************************
 *  LOCAL MACROS CONSTANT\FUNCTION
@@ -27,7 +29,7 @@
 /**********************************************************************************************************************
  *  GLOBAL DATA
  *********************************************************************************************************************/
-IntCtrl_InterruptType interupts[MAX_NUMBER_OF_INTERRUPTS] = {GPIO_PORTA_INTERRUPT};
+uint8 interrupts[MAX_NUMBER_OF_INTERRUPTS] = {GPIO_Port_A, GPIO_Port_B, GPIO_Port_C, GPIO_Port_D, UART0, SSI0, CAN0};
 
 
 /**********************************************************************************************************************
