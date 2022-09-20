@@ -31,6 +31,7 @@
  *  GLOBAL DATA TYPES AND STRUCTURES
  *********************************************************************************************************************/
 extern uint8 interrupts[MAX_NUMBER_OF_INTERRUPTS];
+extern uint8 group_subgroup_priorites[MAX_NUMBER_OF_INTERRUPTS];
 
 /**********************************************************************************************************************
  *  GLOBAL DATA PROTOTYPES

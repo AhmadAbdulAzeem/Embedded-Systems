@@ -57,31 +57,31 @@
 void IntCrtl_Init(void)
 {
     uint8 remainder;
-    /* TODO Configure Grouping\SubGrouping System in APINT register in SCB*/
+    /* Configure Grouping\SubGrouping System in APINT register in SCB*/
     APINT = (0x05FA0000 | (NO_OF_GROUPS_AND_NO_OF_SUBGROUPS << 8));
 
-    /*TODO : Assign Group\Subgroup priority in NVIC_PRIx Nvic and SCB_SYSPRIx Registers*/
+    /* Assign Group\Subgroup priority in NVIC_PRIx Nvic Registers*/
     /* TODO: Assign Group\Subgroup priority in SCB_SYSPRIx Registers */
-    /* TODO: Make an array for group subgroup priority for each interrupt */
+    /* TODO: give each interrupt a different group and subgroup priority */
     for(uint8 i = 0; i < MAX_NUMBER_OF_INTERRUPTS;i++)
     {
         remainder = interrupts[i] % 4;
-        if(remainder == 0)
-            NVIC_PRI_REGS->PRI[interrupts[i]/4] |= (NVIC_GROUP_SUBGROUP_PRIORITY << 5);
-        else if(remainder == 1)
-            NVIC_PRI_REGS->PRI[interrupts[i]/4] |= (NVIC_GROUP_SUBGROUP_PRIORITY << 13);
-        else if(remainder == 2)
-            NVIC_PRI_REGS->PRI[interrupts[i]/4] |= (NVIC_GROUP_SUBGROUP_PRIORITY << 21);
-        else if(remainder == 3)
-            NVIC_PRI_REGS->PRI[interrupts[i]/4] |= (NVIC_GROUP_SUBGROUP_PRIORITY << 29);
+        if(remainder == 0) // access INTA field
+            NVIC_REGS->PRI[interrupts[i]/4] |= (group_subgroup_priorites[i] << 5);
+        else if(remainder == 1) // access INTB field
+            NVIC_REGS->PRI[interrupts[i]/4] |= (group_subgroup_priorites[i] << 13);
+        else if(remainder == 2) // access INTC field
+            NVIC_REGS->PRI[interrupts[i]/4] |= (group_subgroup_priorites[i] << 21);
+        else if(remainder == 3) // access INTD field
+            NVIC_REGS->PRI[interrupts[i]/4] |= (group_subgroup_priorites[i] << 29);
     }
 
-    /*TODO : Enable\Disable based on user configurations in NVIC_ENx and SCB_Sys Registers */
+    /* Enable\Disable based on user configurations in NVIC_ENx Registers */
     /*TODO : Enable\Disable based on user configurations in SCB_Sys Registers */
     for(uint8 j =0; j < MAX_NUMBER_OF_INTERRUPTS; j++)
     {
         remainder = interrupts[j] % 32;
-        NVIC_EN_REGS->EN[interrupts[j]/32] |= (1 << remainder); 
+        NVIC_REGS->EN[interrupts[j]/32] |= (1 << remainder); 
     }
 }
 

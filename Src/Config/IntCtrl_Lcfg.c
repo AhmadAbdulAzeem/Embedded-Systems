@@ -2,9 +2,9 @@
  *  FILE DESCRIPTION
  *  -----------------------------------------------------------------------------------------------------------------*/
 /**        \file  IntCtrl_Lcfg.c
- *        \brief  
+ *        \brief
  *
- *      \details  
+ *      \details
  *
  *
  *********************************************************************************************************************/
@@ -19,18 +19,26 @@
 #include "IntCtrl.h"
 
 /**********************************************************************************************************************
-*  LOCAL MACROS CONSTANT\FUNCTION
-*********************************************************************************************************************/
+ *  LOCAL MACROS CONSTANT\FUNCTION
+ *********************************************************************************************************************/
 
 /**********************************************************************************************************************
- *  LOCAL DATA 
+ *  LOCAL DATA
  *********************************************************************************************************************/
 
 /**********************************************************************************************************************
  *  GLOBAL DATA
  *********************************************************************************************************************/
 uint8 interrupts[MAX_NUMBER_OF_INTERRUPTS] = {GPIO_Port_A, GPIO_Port_B, GPIO_Port_C, GPIO_Port_D, UART0, SSI0, CAN0};
-
+// make sure to follow as configuration parameter NO_OF_GROUPS_AND_NO_OF_SUBGROUPS in IntCtrl_Cfg.h
+// every interrupt has a priority in group_subgroup_priorites array  one to one so interupt interrupts[0] takes priority group_subgroup_priorites[0]
+uint8 group_subgroup_priorites[MAX_NUMBER_OF_INTERRUPTS] = {GROUPPRIORITY_0_SUBPRIORITY_0_XYY,
+                                                            GROUPPRIORITY_0_SUBPRIORITY_1_XYY,
+                                                            GROUPPRIORITY_0_SUBPRIORITY_2_XYY,
+                                                            GROUPPRIORITY_0_SUBPRIORITY_3_XYY,
+                                                            GROUPPRIORITY_1_SUBPRIORITY_0_XYY,
+                                                            GROUPPRIORITY_1_SUBPRIORITY_1_XYY,
+                                                            GROUPPRIORITY_1_SUBPRIORITY_2_XYY};
 
 /**********************************************************************************************************************
  *  END OF FILE: IntCtrl_Lcfg.c
