@@ -30,8 +30,8 @@
  */
 
 #define NO_OF_GROUPS_AND_NO_OF_SUBGROUPS NO_OF_GROUPS_2_NO_OF_SUBGROUPS_4
-#define NVIC_GROUP_SUBGROUP_PRIORITY GROUPPRIORITY_0_SUBPRIORITY_1_XYY
-#define MAX_NUMBER_OF_INTERRUPTS 7
+#define NVIC_MAX_NUMBER_OF_INTERRUPTS 7
+#define SCB_MAX_NUMBER_OF_INTERRUPTS 2
 
 /**********************************************************************************************************************
  *  GLOBAL FUNCTION MACROS

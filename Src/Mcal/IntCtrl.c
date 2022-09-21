@@ -58,30 +58,59 @@ void IntCrtl_Init(void)
 {
     uint8 remainder;
     /* Configure Grouping\SubGrouping System in APINT register in SCB*/
-    APINT = (0x05FA0000 | (NO_OF_GROUPS_AND_NO_OF_SUBGROUPS << 8));
+    SCB_REGS->APINT = (0x05FA0000 | (NO_OF_GROUPS_AND_NO_OF_SUBGROUPS << 8));
 
     /* Assign Group\Subgroup priority in NVIC_PRIx Nvic Registers*/
-    /* TODO: Assign Group\Subgroup priority in SCB_SYSPRIx Registers */
-    /* TODO: give each interrupt a different group and subgroup priority */
-    for(uint8 i = 0; i < MAX_NUMBER_OF_INTERRUPTS;i++)
+    /* give each interrupt a different group and subgroup priority */
+    for(uint8 i = 0; i < NVIC_MAX_NUMBER_OF_INTERRUPTS;i++)
     {
-        remainder = interrupts[i] % 4;
+        remainder = nvic_interrupts[i] % 4;
         if(remainder == 0) // access INTA field
-            NVIC_REGS->PRI[interrupts[i]/4] |= (group_subgroup_priorites[i] << 5);
+            NVIC_REGS->PRI[nvic_interrupts[i]/4] |= (nvic_group_subgroup_priorites[i] << 5);
         else if(remainder == 1) // access INTB field
-            NVIC_REGS->PRI[interrupts[i]/4] |= (group_subgroup_priorites[i] << 13);
+            NVIC_REGS->PRI[nvic_interrupts[i]/4] |= (nvic_group_subgroup_priorites[i] << 13);
         else if(remainder == 2) // access INTC field
-            NVIC_REGS->PRI[interrupts[i]/4] |= (group_subgroup_priorites[i] << 21);
+            NVIC_REGS->PRI[nvic_interrupts[i]/4] |= (nvic_group_subgroup_priorites[i] << 21);
         else if(remainder == 3) // access INTD field
-            NVIC_REGS->PRI[interrupts[i]/4] |= (group_subgroup_priorites[i] << 29);
+            NVIC_REGS->PRI[nvic_interrupts[i]/4] |= (nvic_group_subgroup_priorites[i] << 29);
+    }
+
+    /* Assign Group\Subgroup priority in SCB_SYSPRIx Registers */
+    for(uint8 j = 0; j < SCB_MAX_NUMBER_OF_INTERRUPTS; j++)
+    {
+        if(scb_interrupts[j] == Memory_Management)
+            SCB_REGS->SYSPRI1 |= scb_group_subgroup_priorites[j] << 5;
+        else if(scb_interrupts[j] == Bus_Fault)
+            SCB_REGS->SYSPRI1 |= scb_group_subgroup_priorites[j] << 13;
+        else if(scb_interrupts[j] == Usage_Fault)
+            SCB_REGS->SYSPRI1 |= scb_group_subgroup_priorites[j] << 21;
+        else if(scb_interrupts[j] == SVCall)
+            SCB_REGS->SYSPRI2 |= scb_group_subgroup_priorites[j] << 29;
+        else if(scb_interrupts[j] == Debug_Monitor)
+            SCB_REGS->SYSPRI3 |= scb_group_subgroup_priorites[j] << 5;
+        else if(scb_interrupts[j] == PendSV)
+            SCB_REGS->SYSPRI3 |= scb_group_subgroup_priorites[j] << 21;
+        else if(scb_interrupts[j] == SysTick)
+            SCB_REGS->SYSPRI3 |= scb_group_subgroup_priorites[j] << 29;
     }
 
     /* Enable\Disable based on user configurations in NVIC_ENx Registers */
-    /*TODO : Enable\Disable based on user configurations in SCB_Sys Registers */
-    for(uint8 j =0; j < MAX_NUMBER_OF_INTERRUPTS; j++)
+    for(uint8 k =0; k < NVIC_MAX_NUMBER_OF_INTERRUPTS; k++)
     {
-        remainder = interrupts[j] % 32;
-        NVIC_REGS->EN[interrupts[j]/32] |= (1 << remainder); 
+        remainder = nvic_interrupts[k] % 32;
+        NVIC_REGS->EN[nvic_interrupts[k]/32] |= (1 << remainder); 
+    }
+
+    /* Enable\Disable based on user configurations in SCB_Sys Registers */
+    /* we can only enable memory and bus, usage faults as mentioned in datasheet in SYSHNDCTRL register */
+    for(uint8 m = 0; m < SCB_MAX_NUMBER_OF_INTERRUPTS; m++)
+    {
+        if(scb_interrupts[m] == Memory_Management)
+            SCB_REGS->SYSHNDCTRL |= 1 << 16;
+        else if(scb_interrupts[m] == Bus_Fault)
+            SCB_REGS->SYSHNDCTRL |= 1 << 17;
+        else if(scb_interrupts[m] == Usage_Fault)
+            SCB_REGS->SYSHNDCTRL |= 1 << 18;
     }
 }
 

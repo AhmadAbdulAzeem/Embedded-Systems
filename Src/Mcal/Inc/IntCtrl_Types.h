@@ -114,6 +114,17 @@ typedef enum
 }NVIC_IntCtrl_InterruptType;
 
 typedef enum{
+    Memory_Management = 4,
+    Bus_Fault,
+    Usage_Fault,
+    SVCall = 11,
+    Debug_Monitor,
+    PendSV = 14,
+    SysTick
+}SCB_IntCtrl_InterruptType;
+
+
+typedef enum{
 
     /*NO_OF_GROUPS_8_NO_OF_SUBGROUPS_1*/
 

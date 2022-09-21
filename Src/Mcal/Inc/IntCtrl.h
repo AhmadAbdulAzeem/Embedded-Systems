@@ -30,9 +30,10 @@
 /**********************************************************************************************************************
  *  GLOBAL DATA TYPES AND STRUCTURES
  *********************************************************************************************************************/
-extern uint8 interrupts[MAX_NUMBER_OF_INTERRUPTS];
-extern uint8 group_subgroup_priorites[MAX_NUMBER_OF_INTERRUPTS];
-
+extern uint8 nvic_interrupts[NVIC_MAX_NUMBER_OF_INTERRUPTS];
+extern uint8 nvic_group_subgroup_priorites[NVIC_MAX_NUMBER_OF_INTERRUPTS];
+extern uint8 scb_interrupts[SCB_MAX_NUMBER_OF_INTERRUPTS];
+extern uint8 scb_group_subgroup_priorites[NVIC_MAX_NUMBER_OF_INTERRUPTS];
 /**********************************************************************************************************************
  *  GLOBAL DATA PROTOTYPES
  *********************************************************************************************************************/

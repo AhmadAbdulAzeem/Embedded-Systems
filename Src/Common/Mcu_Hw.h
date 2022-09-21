@@ -64,13 +64,36 @@ typedef struct
 #define NVIC_REGS        ((NVIC_REGS_CONFIG *)(CORTEXM4_PERI_BASE_ADDRESS+0x100))
 /**********************************************************************************************************************/
 
+/***************************************************************SCB***************************************************/
+typedef struct 
+{
+    volatile uint32 CPUID;
+    volatile uint32 INTCTRL;
+    volatile uint32 VTABLE;
+    volatile uint32 APINT;
+    volatile uint32 SYSCTRL;
+    volatile uint32 CFGCTRL;
+    volatile uint32 SYSPRI1;
+    volatile uint32 SYSPRI2;
+    volatile uint32 SYSPRI3;
+    volatile uint32 SYSHNDCTRL;
+    volatile uint32 FAULTSTAT;
+    volatile uint32 HFAULTSTAT;
+    volatile uint32 RESERVED;
+    volatile uint32 MMADDR;
+    volatile uint32 FAULTADDR;
+}SCB_REGS_CONFIG;
+
+#define SCB_REGS        ((SCB_REGS_CONFIG *)(CORTEXM4_PERI_BASE_ADDRESS+0xD00))
+/**********************************************************************************************************************/
+
 
 
 /**********************************************************************************************************************
  *  GLOBAL CONSTANT MACROS
  *********************************************************************************************************************/
 #define CORTEXM4_PERI_BASE_ADDRESS             0xE000E000
-#define APINT                                  *((volatile uint32*)(CORTEXM4_PERI_BASE_ADDRESS+0xD0C))
+// #define APINT                                  *((volatile uint32*)(CORTEXM4_PERI_BASE_ADDRESS+0xD0C))
 #define INTCTRL                                *((volatile INTCTRL_Tag*)(CORTEXM4_PERI_BASE_ADDRESS+0xD04))
 #define PRI0                                  *((volatile uint32*)(CORTEXM4_PERI_BASE_ADDRESS+0x400))
 #define EN0                                  *((volatile uint32*)(CORTEXM4_PERI_BASE_ADDRESS+0x100))
