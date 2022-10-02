@@ -52,7 +52,7 @@ void SysCtrl_Reset(void)
         /* clear reset bit */
         SYS_CTRL_REGS->SYS_CTRL_RESET_REGs[SysCtrlreset_Config.peripheral] &= ~(1 << SysCtrlreset_Config.module);
         /* wait untill the peripheral is ready */
-        while((SYS_CTRL_REGS->SYS_CTRL_RESET_REGs[SysCtrlreset_Config.peripheral] & (1 << SysCtrlreset_Config.module)) == 0);
+        while((SYS_CTRL_REGS->SYS_CTRL_PERIPHERAL_READY_REGs[SysCtrlreset_Config.peripheral] >> SysCtrlreset_Config.module  & 1) == 0);
     }
 }
 
