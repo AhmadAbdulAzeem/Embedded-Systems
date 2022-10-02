@@ -3,7 +3,7 @@
 
 int main(void)
 {
-	/* IntCrtl_Init(); */
+//IntCrtl_Init();
 	SysCtrl_Reset();
 	while(1)
 	{

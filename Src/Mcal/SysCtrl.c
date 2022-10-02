@@ -39,6 +39,21 @@ void SysCtrl_Reset(void)
         SET_BIT((SCB_REGS->APINT), 2);
         return;
     }
+    else if(SysCtrlreset_Config.softare_reset == CORE_ONLY_RESET)
+    {
+        SCB_REGS->APINT = 0x05FA0000;
+        SET_BIT((SCB_REGS->APINT), 0);
+        return;
+    }
+    else /* peripheral reset */
+    {
+        /* set reset bit */
+        SYS_CTRL_REGS->SYS_CTRL_RESET_REGs[SysCtrlreset_Config.peripheral] |= 1 << SysCtrlreset_Config.module;
+        /* clear reset bit */
+        SYS_CTRL_REGS->SYS_CTRL_RESET_REGs[SysCtrlreset_Config.peripheral] &= ~(1 << SysCtrlreset_Config.module);
+        /* wait untill the peripheral is ready */
+        while((SYS_CTRL_REGS->SYS_CTRL_RESET_REGs[SysCtrlreset_Config.peripheral] & (1 << SysCtrlreset_Config.module)) == 0);
+    }
 }
 
 /**********************************************************************************************************************

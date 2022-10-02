@@ -25,7 +25,7 @@
 /**********************************************************************************************************************
  *  GLOBAL DATA
  *********************************************************************************************************************/
-SysCtrl_ConfigType SysCtrlreset_Config = {SYSTEM_RESET, NONE, NONE};
+SysCtrl_ConfigType SysCtrlreset_Config = {PERIPHERAL_RESET, GENERAL_PURPOUSE_INPUT_OUTPUT, GPIO_PORT_B_MODULE};
 
 /**********************************************************************************************************************
  *  END OF FILE: SysCtrl_Lcfg.c
