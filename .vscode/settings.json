@@ -1,0 +1,9 @@
+{
+    "files.associations": {
+        "std_types.h": "c",
+        "intctrl_cfg.h": "c",
+        "sysctrl.h": "c",
+        "sysctrl_types.h": "c",
+        "mcu_hw.h": "c"
+    }
+}

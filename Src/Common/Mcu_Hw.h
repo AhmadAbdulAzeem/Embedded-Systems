@@ -62,7 +62,7 @@ typedef struct
 }NVIC_REGS_CONFIG;
 
 #define NVIC_REGS        ((NVIC_REGS_CONFIG *)(CORTEXM4_PERI_BASE_ADDRESS+0x100))
-/**********************************************************************************************************************/
+
 
 /***************************************************************SCB***************************************************/
 typedef struct 
@@ -85,7 +85,22 @@ typedef struct
 }SCB_REGS_CONFIG;
 
 #define SCB_REGS        ((SCB_REGS_CONFIG *)(CORTEXM4_PERI_BASE_ADDRESS+0xD00))
-/**********************************************************************************************************************/
+
+/***************************************************************SYS_CTRL***************************************************/
+typedef struct 
+{
+    volatile uint32 SYS_CTRL_RESET_REGs[24];
+    uint32 Reserved_0[40];
+    volatile uint32 SYS_CTRL_RUN_MODE_GC_REGs[24];
+    uint32 Reserved_1[40];
+    volatile uint32 SYS_CTRL_SLEEP_MODE_GC_REGs[24];
+    uint32 Reserved_2[40];
+    volatile uint32 SYS_CTRL_DEEP_SLEEP_MODE_GC_REGs[24];
+    uint32 Reserved_3[104];
+    volatile uint32 SYS_CTRL_PERIPHERAL_READY_REGs[24];
+}SYS_CTRL_REGS_CONFIG;
+
+#define SYS_CTRL_REGS        ((SYS_CTRL_REGS_CONFIG *)(SYS_CTRL_BASE_ADDRESS+0x500))
 
 
 
@@ -93,13 +108,7 @@ typedef struct
  *  GLOBAL CONSTANT MACROS
  *********************************************************************************************************************/
 #define CORTEXM4_PERI_BASE_ADDRESS             0xE000E000
-// #define APINT                                  *((volatile uint32*)(CORTEXM4_PERI_BASE_ADDRESS+0xD0C))
-#define INTCTRL                                *((volatile INTCTRL_Tag*)(CORTEXM4_PERI_BASE_ADDRESS+0xD04))
-#define PRI0                                  *((volatile uint32*)(CORTEXM4_PERI_BASE_ADDRESS+0x400))
-#define EN0                                  *((volatile uint32*)(CORTEXM4_PERI_BASE_ADDRESS+0x100))
-
-
-
+#define SYS_CTRL_BASE_ADDRESS                  0x400FE000
 /**********************************************************************************************************************
  *  GLOBAL DATA PROTOTYPES
  *********************************************************************************************************************/
