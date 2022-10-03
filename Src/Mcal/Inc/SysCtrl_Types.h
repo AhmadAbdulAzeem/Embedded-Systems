@@ -19,8 +19,11 @@
 /**********************************************************************************************************************
  *  GLOBAL CONSTANT MACROS
  *********************************************************************************************************************/
+#define ENABLED          1
+#define DISABLED         0
 
-
+#define    RUN_MODE_CLOCK_CONTROL	                	    0
+#define    DEEP_SLEEP_MODE_CONTROL	                        1
 /**********************************************************************************************************************
  *  GLOBAL FUNCTION MACROS
  *********************************************************************************************************************/
@@ -29,6 +32,9 @@
 /**********************************************************************************************************************
  *  GLOBAL DATA TYPES AND STRUCTURES
  *********************************************************************************************************************/
+
+/*************************************************************Reset control*******************************************/
+
 typedef enum{
     PERIPHERAL_RESET,
     CORE_ONLY_RESET,
@@ -119,6 +125,58 @@ typedef struct{
     SysCtrl_ModuleType module;
 }SysCtrl_ConfigType;
 
+
+/*************************************************************Clock control*******************************************/
+typedef enum{
+    MOSC = 0X0,                     /* Main oscillator */
+    PIOSC = 0x1,                    /* Precision internal oscillator */
+    PIOSC_DIVIDED_BY_4 = 0x2,       /* Precision internal oscillator / 4 */
+    LFIOSC = 0X3                    /* Low-frequency internal oscillator */
+}SysCtrl_OscillatorSource;
+
+typedef enum{
+    CRYSTAL_VALUE_4_MHz = 0X06, 
+    CRYSTAL_VALUE_4_096_MHz = 0X07, 
+    CRYSTAL_VALUE_4_9152_MHz = 0X08, 
+    CRYSTAL_VALUE_5_MHz_USB = 0X09,
+    CRYSTAL_VALUE_5_12_MHz = 0X0A,
+    CRYSTAL_VALUE_6_MHz_USB = 0X0B,
+    CRYSTAL_VALUE_6_144_MHz = 0X0C,
+    CRYSTAL_VALUE_7_3728_MHz = 0X0D,
+    CRYSTAL_VALUE_8_MHz_USB = 0X0E,
+    CRYSTAL_VALUE_8_192_MHz = 0X0F,
+    CRYSTAL_VALUE_10_MHz_USB = 0X10,
+    CRYSTAL_VALUE_12_MHz_USB = 0X11,
+    CRYSTAL_VALUE_12_288_MHz = 0X12,
+    CRYSTAL_VALUE_13_56_MHz = 0X13,
+    CRYSTAL_VALUE_14_31818_MHz = 0X14,
+    CRYSTAL_VALUE_16_MHz_USB = 0X15,
+    CRYSTAL_VALUE_16_384_MHz = 0X16,
+    CRYSTAL_VALUE_18_MHz_USB = 0X17,
+    CRYSTAL_VALUE_20_MHz_USB = 0X18,
+    CRYSTAL_VALUE_24_MHz_USB = 0X19,
+    CRYSTAL_VALUE_25_MHz_USB = 0X1A
+}SysCtrl_CrystalValueType;
+
+
+typedef enum{
+    SYSDIV_DIVISOR1__RESERVED=0,
+    SYSDIV_DIVISOR2_RESERVED,
+    SYSDIV_DIVISOR3_66_O_67MHZ,
+    SYSDIV_DIVISOR4_50MHZ,
+    SYSDIV_DIVISOR5_40MHZ,
+    SYSDIV_DIVISOR6_33_O_33MHZ,
+    SYSDIV_DIVISOR7_28_O_57MHZ,
+    SYSDIV_DIVISOR8_25MHZ,
+    SYSDIV_DIVISOR9_22_O_22MHZ,
+    SYSDIV_DIVISOR10_20MHZ,
+    SYSDIV_DIVISOR11_18_O_18MHZ,
+    SYSDIV_DIVISOR12_16_O_67MHZ,
+    SYSDIV_DIVISOR13_15_O_38MHZ,
+    SYSDIV_DIVISOR14_14_O_29MHZ,
+    SYSDIV_DIVISOR15_13_O_33MHZ,
+    SYSDIV_DIVISOR16_12_O_5MHZ
+}SysCtrl_SysDivisorType;
 #endif  /* SYSCTRL_TYPES_H */
 
 /**********************************************************************************************************************

@@ -5,8 +5,8 @@
  *         File:  Mcu_Hw.h
  *       Module:  Mcu_Hw
  *
- *  Description:  header file for Registers definition    
- *  
+ *  Description:  header file for Registers definition
+ *
  *********************************************************************************************************************/
 #ifndef MCU_HW_H
 #define MCU_HW_H
@@ -19,32 +19,32 @@
 /**********************************************************************************************************************
  *  GLOBAL DATA TYPES AND STRUCTURES
  *********************************************************************************************************************/
-typedef struct 
+typedef struct
 {
-    uint32 VECACT   :8;
-    uint32          :3;
-    uint32 RETBASE  :1;
-    uint32 VECPEND  :8;
-    uint32          :2;
-    uint32 ISRPEND  :1;
-    uint32 ISRPRE   :1;
-    uint32          :1;
-    uint32 PENDSTCLR:1;
-    uint32 PENDSTSET:1;
-    uint32 UNPENDSV :1;
-    uint32 PENDSV   :1;
-    uint32          :2;
-    uint32 NMISET   :1; 
-}INTCTRL_BF;
+    uint32 VECACT : 8;
+    uint32 : 3;
+    uint32 RETBASE : 1;
+    uint32 VECPEND : 8;
+    uint32 : 2;
+    uint32 ISRPEND : 1;
+    uint32 ISRPRE : 1;
+    uint32 : 1;
+    uint32 PENDSTCLR : 1;
+    uint32 PENDSTSET : 1;
+    uint32 UNPENDSV : 1;
+    uint32 PENDSV : 1;
+    uint32 : 2;
+    uint32 NMISET : 1;
+} INTCTRL_BF;
 
-typedef union 
+typedef union
 {
     uint32 R;
     INTCTRL_BF B;
-}INTCTRL_Tag;
+} INTCTRL_Tag;
 
 /***************************************************************NVIC***************************************************/
-typedef struct 
+typedef struct
 {
     volatile uint32 EN[5];
     volatile uint32 RESERVED_1[27];
@@ -59,13 +59,12 @@ typedef struct
     volatile uint32 PRI[35];
     volatile uint32 RESERVED_6[669];
     volatile uint32 SWTRIG;
-}NVIC_REGS_CONFIG;
+} NVIC_REGS_CONFIG;
 
-#define NVIC_REGS        ((NVIC_REGS_CONFIG *)(CORTEXM4_PERI_BASE_ADDRESS+0x100))
-
+#define NVIC_REGS ((NVIC_REGS_CONFIG *)(CORTEXM4_PERI_BASE_ADDRESS + 0x100))
 
 /***************************************************************SCB***************************************************/
-typedef struct 
+typedef struct
 {
     volatile uint32 CPUID;
     volatile uint32 INTCTRL;
@@ -82,12 +81,12 @@ typedef struct
     volatile uint32 RESERVED;
     volatile uint32 MMADDR;
     volatile uint32 FAULTADDR;
-}SCB_REGS_CONFIG;
+} SCB_REGS_CONFIG;
 
-#define SCB_REGS        ((SCB_REGS_CONFIG *)(CORTEXM4_PERI_BASE_ADDRESS+0xD00))
+#define SCB_REGS ((SCB_REGS_CONFIG *)(CORTEXM4_PERI_BASE_ADDRESS + 0xD00))
 
 /***************************************************************SYS_CTRL***************************************************/
-typedef struct 
+typedef struct
 {
     volatile uint32 SYS_CTRL_RESET_REGs[24];
     uint32 Reserved_0[40];
@@ -98,25 +97,60 @@ typedef struct
     volatile uint32 SYS_CTRL_DEEP_SLEEP_MODE_GC_REGs[24];
     uint32 Reserved_3[104];
     volatile uint32 SYS_CTRL_PERIPHERAL_READY_REGs[24];
-}SYS_CTRL_REGS_CONFIG;
+} SYS_CTRL_REGS_CONFIG;
 
-#define SYS_CTRL_REGS        ((SYS_CTRL_REGS_CONFIG *)(SYS_CTRL_BASE_ADDRESS+0x500))
+#define SYS_CTRL_REGS ((SYS_CTRL_REGS_CONFIG *)(SYS_CTRL_BASE_ADDRESS + 0x500))
 
+typedef struct
+{
 
+    uint32 MOSCDIS : 1;
+
+    uint32 reserved_1 : 3;
+
+    uint32 OSCSRC : 2;
+    uint32 XTAL : 5;
+    uint32 BYPASS : 1;
+
+    uint32 reserved_2 : 1;
+
+    uint32 PWRDN : 1;
+
+    uint32 reserved_3 : 3;
+
+    uint32 PWMDIV : 3;
+    uint32 USEPWMDIV : 1;
+
+    uint32 reserved_4 : 1;
+
+    uint32 USESYSDIV : 1;
+    uint32 SYSDIV : 4;
+
+    uint32 ACG : 1;
+
+    uint32 reserved_5 : 4;
+
+} RCC_BIT_FIELD;
+typedef union
+{
+    uint32 reg;
+    RCC_BIT_FIELD bit;
+
+} SYS_CTRL_RCC_config;
+
+#define SYS_CTRL_RCC_REG                    ((volatile SYS_CTRL_RCC_config *)(SYS_CTRL_BASE_ADDRESS + 0x060))
+#define SYS_CTRL_MOSCCTL_REG                *((volatile uint32 *)(SYS_CTRL_BASE_ADDRESS+0x07C))
 
 /**********************************************************************************************************************
  *  GLOBAL CONSTANT MACROS
  *********************************************************************************************************************/
-#define CORTEXM4_PERI_BASE_ADDRESS             0xE000E000
-#define SYS_CTRL_BASE_ADDRESS                  0x400FE000
+#define CORTEXM4_PERI_BASE_ADDRESS 0xE000E000
+#define SYS_CTRL_BASE_ADDRESS 0x400FE000
 /**********************************************************************************************************************
  *  GLOBAL DATA PROTOTYPES
  *********************************************************************************************************************/
 
- 
-
- 
-#endif  /* MCU_HW_H */
+#endif /* MCU_HW_H */
 
 /**********************************************************************************************************************
  *  END OF FILE: Mcu_Hw.h
