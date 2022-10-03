@@ -89,11 +89,41 @@ void SysCtrl_ClockInit(void)
     SYS_CTRL_RCC_REG->bit.SYSDIV = SSDIV_DIVISOR;  
 
     /* TODO: Enable and disable divisor for PWM */
-    
+
     /*choose sleep mode control*/
     SYS_CTRL_RCC_REG->bit.ACG = SLEEP_MODE_CONTROL;  
 }
 
+
+void SysCtrl_EnableClockRunMode(SysCtrl_PeripheralType peripheral, SysCtrl_ModuleType peripheral_module)
+{
+    SYS_CTRL_REGS->SYS_CTRL_RUN_MODE_GC_REGs[peripheral] |= (1 << peripheral_module);
+}
+
+void SysCtrl_DisableClockRunMode(SysCtrl_PeripheralType peripheral, SysCtrl_ModuleType peripheral_module)
+{
+    SYS_CTRL_REGS->SYS_CTRL_RUN_MODE_GC_REGs[peripheral] &= ~(1 << peripheral_module);
+}
+
+void SysCtrl_EnableClockSleepMode(SysCtrl_PeripheralType peripheral, SysCtrl_ModuleType peripheral_module)
+{
+    SYS_CTRL_REGS->SYS_CTRL_SLEEP_MODE_GC_REGs[peripheral] |= (1 << peripheral_module);
+}
+
+void SysCtrl_DisableClockSleepMode(SysCtrl_PeripheralType peripheral, SysCtrl_ModuleType peripheral_module)
+{
+    SYS_CTRL_REGS->SYS_CTRL_SLEEP_MODE_GC_REGs[peripheral] &= ~(1 << peripheral_module);
+}
+
+void SysCtrl_EnableClockDeepSleepMode(SysCtrl_PeripheralType peripheral, SysCtrl_ModuleType peripheral_module)
+{
+    SYS_CTRL_REGS->SYS_CTRL_DEEP_SLEEP_MODE_GC_REGs[peripheral] |= (1 << peripheral_module);
+}
+
+void SysCtrl_DisableClockDeepSleepMode(SysCtrl_PeripheralType peripheral, SysCtrl_ModuleType peripheral_module)
+{
+    SYS_CTRL_REGS->SYS_CTRL_DEEP_SLEEP_MODE_GC_REGs[peripheral] &= ~(1 << peripheral_module);
+}
 /**********************************************************************************************************************
  *  END OF FILE: SysCtrl.c
  *********************************************************************************************************************/
