@@ -138,8 +138,64 @@ typedef union
 
 } SYS_CTRL_RCC_config;
 
-#define SYS_CTRL_RCC_REG                    ((volatile SYS_CTRL_RCC_config *)(SYS_CTRL_BASE_ADDRESS + 0x060))
-#define SYS_CTRL_MOSCCTL_REG                *((volatile uint32 *)(SYS_CTRL_BASE_ADDRESS+0x07C))
+#define SYS_CTRL_RCC_REG ((volatile SYS_CTRL_RCC_config *)(SYS_CTRL_BASE_ADDRESS + 0x060))
+#define SYS_CTRL_MOSCCTL_REG *((volatile uint32 *)(SYS_CTRL_BASE_ADDRESS + 0x07C))
+
+/***************************************************************GPIO***************************************************/
+#define GPIO_PORT_A_APB_BASE_ADDRESS 0x40004000
+#define GPIO_PORT_B_APB_BASE_ADDRESS 0x40005000
+#define GPIO_PORT_C_APB_BASE_ADDRESS 0x40006000
+#define GPIO_PORT_D_APB_BASE_ADDRESS 0x40007000
+#define GPIO_PORT_E_APB_BASE_ADDRESS 0x40024000
+#define GPIO_PORT_F_APB_BASE_ADDRESS 0x40025000
+
+typedef struct
+{
+    volatile uint32 GPIODATA[256];
+    volatile uint32 GPIODIR;
+    volatile uint32 GPIOIS;
+    volatile uint32 GPIOIBE;
+    volatile uint32 GPIOIEV;
+    volatile uint32 GPIOIM;
+    volatile uint32 GPIORIS;
+    volatile uint32 GPIOMIS;
+    volatile uint32 GPIOICR;
+    volatile uint32 GPIOAFSEL;
+    volatile uint32 RESERVED[55];
+    volatile uint32 GPIODR2R;
+    volatile uint32 GPIODR4R;
+    volatile uint32 GPIODR8R;
+    volatile uint32 GPIOODR;
+    volatile uint32 GPIOPUR;
+    volatile uint32 GPIOPDR;
+    volatile uint32 GPIOSLR;
+    volatile uint32 GPIODEN;
+    volatile uint32 GPIOLOCK;
+    volatile uint32 GPIOCR;
+    volatile uint32 GPIOAMSEL;
+    volatile uint32 GPIOPCTL;
+    volatile uint32 GPIOADCCTL;
+    volatile uint32 GPIODMACTL;
+    volatile uint32 GPIOPeriphID4;
+    volatile uint32 GPIOPeriphID5;
+    volatile uint32 GPIOPeriphID6;
+    volatile uint32 GPIOPeriphID7;
+    volatile uint32 GPIOPeriphID0;
+    volatile uint32 GPIOPeriphID1;
+    volatile uint32 GPIOPeriphID2;
+    volatile uint32 GPIOPeriphID3;
+    volatile uint32 GPIOPCellID0;
+    volatile uint32 GPIOPCellID1;
+    volatile uint32 GPIOPCellID2;
+    volatile uint32 GPIOPCellID3;
+} GPIO_GENERAL_REGS;
+
+#define GPIO_PORT_A_REGS ((GPIO_GENERAL_REGS *)(GPIO_PORT_A_APB_BASE_ADDRESS))
+#define GPIO_PORT_B_REGS ((GPIO_GENERAL_REGS *)(GPIO_PORT_B_APB_BASE_ADDRESS))
+#define GPIO_PORT_C_REGS ((GPIO_GENERAL_REGS *)(GPIO_PORT_C_APB_BASE_ADDRESS))
+#define GPIO_PORT_D_REGS ((GPIO_GENERAL_REGS *)(GPIO_PORT_D_APB_BASE_ADDRESS))
+#define GPIO_PORT_E_REGS ((GPIO_GENERAL_REGS *)(GPIO_PORT_E_APB_BASE_ADDRESS))
+#define GPIO_PORT_F_REGS ((GPIO_GENERAL_REGS *)(GPIO_PORT_F_APB_BASE_ADDRESS))
 
 /**********************************************************************************************************************
  *  GLOBAL CONSTANT MACROS
