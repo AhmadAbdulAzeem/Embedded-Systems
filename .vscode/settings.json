@@ -4,6 +4,10 @@
         "intctrl_cfg.h": "c",
         "sysctrl.h": "c",
         "sysctrl_types.h": "c",
-        "mcu_hw.h": "c"
+        "mcu_hw.h": "c",
+        "port_types.h": "c",
+        "port.h": "c",
+        "intctrl.h": "c",
+        "intctrl_types.h": "c"
     }
 }

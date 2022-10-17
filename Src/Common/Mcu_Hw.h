@@ -162,12 +162,14 @@ typedef struct
     volatile uint32 GPIOICR;
     volatile uint32 GPIOAFSEL;
     volatile uint32 RESERVED[55];
-    volatile uint32 GPIODR2R;
-    volatile uint32 GPIODR4R;
-    volatile uint32 GPIODR8R;
+    // volatile uint32 GPIODR2R;
+    // volatile uint32 GPIODR4R;
+    // volatile uint32 GPIODR8R;
+    volatile uint32 GPIODR_2R_4R_8R[3];
     volatile uint32 GPIOODR;
-    volatile uint32 GPIOPUR;
-    volatile uint32 GPIOPDR;
+    // volatile uint32 GPIOPUR;
+    // volatile uint32 GPIOPDR;
+    volatile uint32 GPIO_PUR_PDR[2];  // pull up and pull down regs
     volatile uint32 GPIOSLR;
     volatile uint32 GPIODEN;
     volatile uint32 GPIOLOCK;
