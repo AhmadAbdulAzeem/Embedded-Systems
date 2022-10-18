@@ -38,6 +38,10 @@ GPIO_GENERAL_REGS *GPIO_ARR[6] = {GPIO_PORT_A_REGS,
 /**********************************************************************************************************************
  *  LOCAL FUNCTIONS
  *********************************************************************************************************************/
+/*
+ * TODO: configure more than one pin ConfigPtr should be pointer to array
+ * TODO: Handle interrupts and alternative function
+ */
 void Port_Init(const Port_ConfigType *ConfigPtr)
 {
     /* Set the direction of the GPIO port pins by programming the GPIODIR register. */
@@ -59,6 +63,30 @@ void Dio_WriteChannel(Port_PinType ChannelId, Port_PinLevelValueType Level)
         GPIO_ARR[ChannelId / 8]->GPIODATA[255] |= 1 << (ChannelId % 8);
     else
         GPIO_ARR[ChannelId / 8]->GPIODATA[255] &= ~(1 << (ChannelId % 8));
+}
+
+Port_PinLevelValueType Dio_ReadChannel(Port_PinType ChannelId)
+{
+    uint8 data;
+    data = GPIO_ARR[ChannelId / 8]->GPIODATA[255];
+    return (1 & (data >> (ChannelId % 8)));
+}
+
+Dio_PortLevelType Dio_ReadPort(Dio_PortType PortId)
+{
+    uint8 data;
+    data = GPIO_ARR[PortId]->GPIODATA[255];
+    return data;
+}
+
+void Dio_WritePort(Dio_PortType PortId, Dio_PortLevelType Level)
+{
+    GPIO_ARR[PortId]->GPIODATA[255] = Level;
+}
+
+void Dio_FlipChannel(Port_PinType ChannelId)
+{
+    GPIO_ARR[ChannelId / 8]->GPIODATA[255] ^= 1 << (ChannelId % 8);
 }
 /**********************************************************************************************************************
  *  GLOBAL FUNCTIONS

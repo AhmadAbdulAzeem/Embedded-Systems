@@ -185,6 +185,15 @@ typedef struct
     Port_PinOutputCurrentType PortPinOutputCurrent;
 }Port_ConfigType;
 
+typedef enum{
+    PORTA = 0,
+    PORTB,
+    PORTC,
+    PORTD,
+    PORTE,
+    PORTF
+}Dio_PortType;
+
 typedef uint8 Dio_PortLevelType;
 /**********************************************************************************************************************
  *  GLOBAL DATA PROTOTYPES

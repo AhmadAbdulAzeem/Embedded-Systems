@@ -27,7 +27,10 @@
  *********************************************************************************************************************/
 void Port_Init(const Port_ConfigType* ConfigPtr);
 void Dio_WriteChannel(Port_PinType ChannelId, Port_PinLevelValueType Level);
-
+Port_PinLevelValueType Dio_ReadChannel(Port_PinType ChannelId);
+Dio_PortLevelType Dio_ReadPort(Dio_PortType PortId);
+void Dio_WritePort(Dio_PortType PortId, Dio_PortLevelType Level);
+void Dio_FlipChannel(Port_PinType ChannelId);
 /**********************************************************************************************************************
  *  GLOBAL DATA TYPES AND STRUCTURES
  *********************************************************************************************************************/
